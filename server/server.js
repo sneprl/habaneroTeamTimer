@@ -7,7 +7,7 @@ var cookieParser = require('cookie-parser');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 3000;
 
-var app = require('./express-webserver');
+var app = require('./webserver');
 var webserver = app.initWebServer(__dirname + "/../");
 
 var server = webserver.listen(port);
