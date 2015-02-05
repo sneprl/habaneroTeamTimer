@@ -7,11 +7,10 @@ var cookieParser = require('cookie-parser');
 var hostname = process.env.HOSTNAME || 'localhost';
 var port = 3000;
 
-var asfdapp = require('./express-webserver');
 var app = require('./express-webserver');
 var webserver = app.initWebServer(__dirname + "/../");
 
-var server = webserver.listen(port, hostname);
+var server = webserver.listen(port);
 
 var _rooms = {};
 
@@ -46,11 +45,8 @@ if (server) {
         console.log("client connected", user);
 
         client.on("joinedRoom", function (data) {
-            
             joinTeam(client, data.roomName, user, data.timerVal);
-            for (var i in _rooms) {
-                socket.to(i).emit('roomStatus', {name: i, users: _rooms[i]});
-            }
+            broadCastRoomStatus();
         });
 
         client.on("timerVal", function (data) {
@@ -60,17 +56,22 @@ if (server) {
 
         client.on("leavedRoom", function (roomName) {
             leaveTeam(client, user);
-            for (var i in _rooms) {
-                socket.to(i).emit('roomStatus', {name: i, users: _rooms[i]});
-            }
+            broadCastRoomStatus();
         });
 
         client.on("disconnect", function () {
             cleanRooms(user, client);
+			broadCastRoomStatus();
         });
 
     });
-
+	
+	function broadCastRoomStatus(){
+		for (var i in _rooms) {
+                socket.to(i).emit('roomStatus', {name: i, users: _rooms[i]});
+            }
+	}
+	
     function joinTeam(client, roomName, user, timerVal) {
         leaveAllRooms(client);
         client.join(roomName);
@@ -101,10 +102,7 @@ if (server) {
                 if(typeof _rooms[j][user + "/" + client.id] === "object"){
                     delete _rooms[j][user + "/" + client.id];
                 }
-//                var index = _rooms[j].indexOf();
-//                if (index !== -1) {
-//                    _rooms[j].splice(index, 1);
-//                }
+
             }
             var empty = true;
             for(var k in _rooms[j]){
@@ -113,9 +111,6 @@ if (server) {
             if(empty === true){
                 delete _rooms[j];
             }
-//            if (_rooms && _rooms[j] && _rooms[j].length === 0) {
-//                delete _rooms[j];
-//            }
         }
     }
 
@@ -125,11 +120,3 @@ if (server) {
 
     }, 1000);
 }
-
-
-
-
-
-
-
-
