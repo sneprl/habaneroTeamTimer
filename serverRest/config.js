@@ -11,13 +11,12 @@ module.exports = function config () {
         teams = new Datastore({ filename: 'db/teams.json', autoload: true }),
     //VAR
         port = 4000,
-        hostname = '192.168.1.31',
+        hostname = 'localhost',
         startUrl = '/api',
         self = {};
 
     function fetchDataUsers (params) {
         var def = Q.defer();
-        console.log(params);
         users.find(params, function (err, res) {
             if (err) {
                 def.reject(err);
@@ -32,7 +31,6 @@ module.exports = function config () {
         app.use(startUrl, router);
         app.listen(port, hostname);
         console.log(hostname + ':' + port);
-
         /*users.insert({
             "nome": "dario",
             "cognome": "civallero",

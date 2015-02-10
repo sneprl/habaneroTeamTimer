@@ -1,11 +1,15 @@
 $("#main-wrapper").on("click", "#loginBtn", function () {
-    var username = $("#loginUsername").val();
+    var user = $("#loginUsername").val();
     $.ajax({
         url: "./login",
         type: "POST",
-        data: {username: username}
-    }).done(function () {
-        window.location.href = "./";
+        data: {user: user}
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        alert(res.message);
+        if(res.code === '200'){
+            window.location.href = "./";
+        }
     });
 
 });

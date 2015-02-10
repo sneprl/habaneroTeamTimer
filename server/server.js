@@ -68,8 +68,8 @@ if (server) {
 	
 	function broadCastRoomStatus(){
 		for (var i in _rooms) {
-                socket.to(i).emit('roomStatus', {name: i, users: _rooms[i]});
-            }
+            socket.to(i).emit('roomStatus', {name: i, users: _rooms[i]});
+        }
 	}
 	
     function joinTeam(client, roomName, user, timerVal) {

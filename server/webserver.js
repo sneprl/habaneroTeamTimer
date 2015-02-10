@@ -1,9 +1,10 @@
 //MODULES
-var express = require("express");
-var session = require('express-session');
-var bodyParser = require('body-parser');
-var path = require('path');
-var exphbs = require('express-handlebars');
+var express = require("express"),
+    session = require('express-session'),
+    bodyParser = require('body-parser'),
+    path = require('path'),
+    exphbs = require('express-handlebars'),
+    http = require('http');
 //create errorHanlder module
 sessionStore = null;
 
@@ -15,6 +16,11 @@ module.exports = {
         var _documentRoot = path.resolve(documentRootRelativePath) + "/";
         var _session;
         var MemoryStore = session.MemoryStore;
+        var restServer = {
+            host: 'localhost',
+            port: 4000,
+            baseUrl: '/api'
+        };
 
         sessionStore = new MemoryStore();
 
@@ -27,8 +33,7 @@ module.exports = {
         }));
 
         app.set('view engine', '.hbs');
-        
-        
+
         app.use(session({
             name: "session_cookie",
             secret: 's3cr3tp4s5',
@@ -50,7 +55,7 @@ module.exports = {
         app.get("/", function (req, res) {
             _session = req.session;
             if (_session.user) {
-                
+
                 res.render("index", {user: _session.user});
             }
             else {
@@ -60,9 +65,23 @@ module.exports = {
 
         app.post("/login", function (req, res) {
             _session = req.session;
-            var username = req.body.username;
-            _session['user'] = username;
-            res.end("logged " + username);
+            var user = req.body.user;
+
+            http.get(
+                {
+                    host: restServer.host, port: restServer.port, path: restServer.baseUrl + '/login',
+                    method: 'POST',
+                    data: { email: user }
+                },
+                function (resp) {
+                    resp.on('data', function (chunk) {
+                        res.send(chunk);
+                        _session['user'] = user;
+                    });
+                }
+            ).on("error", function (e) {
+                console.log("Got error: " + e.message);
+            });
         });
 
         //ERRORS
