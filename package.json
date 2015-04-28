@@ -23,7 +23,9 @@
     "grunt-processhtml": "^0.3.3",
     "grunt-wiredep": "2.x",
     "grunt-include-source": "0.5.x",
-    "grunt-html2js": "0.3.x"
+    "grunt-html2js": "0.3.x",
+    "node-restacular": "0.x",
+    "mongoose": "3.8.x"
   },
   "scripts": {
     "postinstall": "bower install",
