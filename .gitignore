@@ -49,7 +49,9 @@ crashlytics-build.properties
 
 node_modules
 
-**/.DS_Store
+*~
+*.DS_Store
 nbproject
 build
 src/vendor
+*.db

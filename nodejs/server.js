@@ -1,5 +1,7 @@
 var restacular = require('node-restacular'),
+    models = require('./models.js'),
     restConfiguration;
+
 
 restConfiguration = {
     server: {
@@ -14,23 +16,19 @@ restConfiguration = {
         database: "habanero"
     },
     model: function (orm, schema, done) {
+        for (var i = 0; i < models.length; i++) {
+            var m = models[i];
 
-        orm.model("posts", new orm.Schema({
-                title: String,
-                slug: String,
-                body: String
-            },
-            {
-                collection: 'posts',
+            orm.model(m.name, new orm.Schema(m.schema, {
+                collection: m.name,
                 versionKey: false
             }));
+        }
 
         done();
     },
     ormService: require('./rest-adapters/mongooseOrm'),
-    acl: {
-
-    }
+    acl: {}
 };
 
 restacular.launchServer(restConfiguration, function () {
