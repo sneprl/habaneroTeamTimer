@@ -1,0 +1,7 @@
+/* common css stylesheet */
+a {
+  outline: none !important;
+}
+#menu-section {
+  padding: 0;
+}
