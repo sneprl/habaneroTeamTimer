@@ -51,3 +51,5 @@ node_modules
 
 **/.DS_Store
 nbproject
+build
+src/vendor
