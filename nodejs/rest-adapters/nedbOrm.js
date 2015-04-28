@@ -15,9 +15,6 @@ module.exports = {
             console.log("[collection "+model.name+" created]");
         }
 
-
-        //db.users = new Datastore({filename: 'database/users.db', autoload: true});
-
         console.log("[NEDB CONNECTED]");
         done();
     },
