@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="App" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="App" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="App" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="App" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="format-detection" content="telephone=no">
+
+        <title>Habanero Team Timer</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="">
+
+        <link type="text/plain" rel="author" href="humans.txt" />
+
+        <!-- ICONS -->
+        <link rel="icon" href="" />
+        <link rel="apple-touch-icon" href="" />
+
+        <!-- FACEBOOK METAs -->
+        <meta property="og:title" content="">
+        <meta property="og:description" content="">
+        <meta property="og:image" content="">
+
+        <!-- build:css css/screen.min.css -->
+        <!-- VENDOR CSS -->
+        <link rel="stylesheet" href="vendor/html5-boilerplate/css/normalize.css">
+        <link rel="stylesheet" href="vendor/html5-boilerplate/css/main.css">
+        <link rel="stylesheet" href="vendor/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="vendor/angular-ui-select/dist/select.css">
+
+        <!-- APP CSS -->
+        <link rel="stylesheet" href="css/screen.css">
+        <!-- /build -->
+
+        <!-- build:js js/modernizr-2.6.2.min.js -->
+        <!--  MODERNIZR -->
+        <script src="vendor/html5-boilerplate/js/vendor/modernizr-2.6.2.min.js"></script>
+        <!-- /build -->
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="//oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="//oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js">
+        <![endif]-->
+
+        <!-- configuration -->
+        <script>
+            var appConfig  = {
+                mainAppModule: "App"
+            };
+        </script>
+    </head>
+    <body>
+        <div id="main-wrapper">
+            <section data-menu></section>
+
+            <section id="content-section" class="container">
+                <div ng-view></div>
+            </section>
+        </div>
+
+        <!-- build:js js/lib.js -->
+            <!-- bower:js -->
+            <script src="vendor/jquery/dist/jquery.js"></script>
+            <script src="vendor/es5-shim/es5-shim.js"></script>
+            <script src="vendor/angular/angular.js"></script>
+            <script src="vendor/angular-mocks/angular-mocks.js"></script>
+            <script src="vendor/angular-resource/angular-resource.js"></script>
+            <script src="vendor/angular-cookie/angular-cookie.js"></script>
+            <script src="vendor/angular-sanitize/angular-sanitize.js"></script>
+            <script src="vendor/angular-animate/angular-animate.js"></script>
+            <script src="vendor/angular-ui-router/release/angular-ui-router.js"></script>
+            <script src="vendor/angular-touch/angular-touch.js"></script>
+            <script src="vendor/bootstrap/dist/js/bootstrap.js"></script>
+            <script src="vendor/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
+            <script src="vendor/angular-ui-select/dist/select.js"></script>
+            <!-- endbower -->
+        <!-- /build -->
+
+        <!-- build:js js/app.min.js -->
+            <!-- include: "type": "js", "files": "**/*.js" -->
+
+
+          <script src="app/app.js"></script>
+            <script src="app/home/homeCtrl.js"></script>
+            <script src="app/resources/templates.js"></script>
+            <!-- /include -->
+        <!-- /build -->
+    </body>
+</html>
