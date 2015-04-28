@@ -5,9 +5,7 @@ var Datastore = require('nedb'),
     db = {};
 
 module.exports = {
-    /*
-     * Connect
-     */
+
     connect: function (config, done) {
         for (var i = 0; i < models.length; i++) {
             var model = models[i];
@@ -21,31 +19,26 @@ module.exports = {
 
     defineModel: function (model, done) {
         done();
-        //model(mongoose, null, done);
     },
     findAll: function (entity, where, done) {
         try {
             db[entity].find(where, done);
-
-            //var model = mongoose.model(entity);
-            //var w = where || {};
-            //model.find(w, done);
         }
         catch (e) {
             done({code: 500, message: "[Error::ormService.findAll] " + entity}, null);
         }
-
-
     },
     findById: function (entity, id, done) {
         try {
-            var model = mongoose.model(entity);
-            model.findById(id, done);
+            db[entity].findOne({ _id: id }, done);
         }
         catch (e) {
             done({code: 500, message: "[Error::ormService.findById] " + entity}, null);
         }
     },
+
+    //TODO finish implementation
+
     count: function (entity, done) {
         try {
             var model = mongoose.model(entity);
